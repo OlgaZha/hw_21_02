@@ -50,7 +50,7 @@ class EvenNumbers {
 
 let evenNum = new EvenNumbers(1,10) 
 for(let i of evenNum) {
-    console.log(i)
+    // console.log(i)
 }
 
 // Stack 
@@ -152,3 +152,45 @@ newQueue.enqueue(4);
 // console.log(newQueue.first);
 // console.log(newQueue.last);
 
+class UndoStack {
+    constructor() {
+        this.first = null;
+        this.last = null;
+        this.size = 0;
+    }
+
+    performOperation(value) {
+        let node = new Node(value);
+        if(!this.first) {
+            this.first = node;
+            this.last = node;
+        } else {
+            let temp = this.first;
+            this.first = node;
+            this.first.next = temp;
+        }
+        return this.size++;
+    }
+
+    undoOperation() {
+        let temp = this.first;
+        if(!this.first) {
+            return null;
+        } else {
+            if(this.first === this.last) {
+                this.first = null;
+            }
+            this.first = this.first.next;
+            return temp.value;
+        }
+        this.size --;
+    }
+}
+
+let stack = new UndoStack()
+stack.performOperation(3)
+stack.performOperation(1)
+stack.performOperation(4)
+stack.performOperation(2)
+stack.undoOperation()
+console.log(stack)
