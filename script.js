@@ -23,21 +23,19 @@ class Range {
 
 let range = new Range(1, 10, 2)
 for(let i of range) {
-    console.log(i)
+    // console.log(i)
 }
 
 // homework
 class EvenNumbers {
-    constructor(start, end, step=1) {
-        this.start = start;
+    constructor(start, end) {
+        this.start = start %2===0 ? start : start +1;
         this.end = end; 
-        this.step = step;
     }
 
     [Symbol.iterator] () {
-        let cur = this.start % 2 === 0;
+        let cur = this.start;
         let end = this.end;
-        let step = this.step + 1;
         return {next() {
             if(cur <= end) {
                 let value = cur;
@@ -66,7 +64,7 @@ class Node {
 }
 
 class Stack {
-    constructor(first, last, size) {
+    constructor() {
         this.first = null;
         this.last = null;
         this.size = 0;
@@ -82,6 +80,75 @@ class Stack {
             this.first = node;
             this.first.next = temp;
         }
+        return this.size++;
+    }
+
+    pop() {
+        let temp = this.first;
+        if(!this.first) {
+            return null;
+        } else {
+
+            if(this.first === this.last) {
+                this.first = null;
+            }
+            this.first = this.first.next;
+            return temp.value;
+        }
+        this.size --;
     }
 }
+
+let newStack = new Stack();
+newStack.push(1);
+newStack.push(2);
+newStack.push(3);
+newStack.push(4);
+
+// console.log(newStack.first);
+// console.log(newStack.last);
+
+class Queue {
+    constructor() {
+        this.first = null;
+        this.last = null;
+        this.size = 0;
+    }
+//push
+    enqueue(value) {
+        let node = new Node(value);
+        if(!this.first) {
+            this.first = node;
+            this.last = node;
+        } else {
+            this.last.next = node;
+            this.last = node;
+        }
+        return this.size++;
+    }
+
+    dequeue() {
+        let temp = this.first;
+        if(!this.first){
+            return null;
+        } else {
+
+            if(this.first === this.last) {
+                this.first = null;
+            }
+            this.first = this.first.next;
+        }
+        this.size--;
+        return temp.value;
+    }
+}
+
+let newQueue = new Queue();
+newQueue.enqueue(1);
+newQueue.enqueue(2);
+newQueue.enqueue(3);
+newQueue.enqueue(4);
+
+// console.log(newQueue.first);
+// console.log(newQueue.last);
 
