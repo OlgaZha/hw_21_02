@@ -93,9 +93,9 @@ class Stack {
                 this.first = null;
             }
             this.first = this.first.next;
+            this.size --;
             return temp.value;
         }
-        this.size --;
     }
 }
 
@@ -181,16 +181,15 @@ class UndoStack {
                 this.first = null;
             }
             this.first = this.first.next;
+            this.size --;
             return temp.value;
         }
-        this.size --;
     }
 }
 
 let stack = new UndoStack()
-stack.performOperation(3)
-stack.performOperation(1)
-stack.performOperation(4)
-stack.performOperation(2)
+stack.performOperation('Select a letter')
+stack.performOperation('Copy a word')
+stack.performOperation('Write a text')
 stack.undoOperation()
 console.log(stack)
